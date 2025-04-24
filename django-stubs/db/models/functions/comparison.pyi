@@ -4,11 +4,12 @@ from django.db.backends.base.base import BaseDatabaseWrapper
 from django.db.models import Func
 from django.db.models.expressions import Combinable
 from django.db.models.fields import Field
+from django.db.models.fields.mixins import FieldCacheMixin
 from django.db.models.fields.json import JSONField
 from django.db.models.sql.compiler import SQLCompiler, _AsSqlType
 
 class Cast(Func):
-    def __init__(self, expression: Combinable | str, output_field: str | Field) -> None: ...
+    def __init__(self, expression: Combinable | str, output_field: str | Field | FieldCacheMixin) -> None: ...
 
 class Coalesce(Func): ...
 

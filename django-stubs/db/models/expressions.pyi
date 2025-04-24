@@ -7,6 +7,7 @@ from typing import Any, ClassVar, Generic, Literal, NoReturn, TypeAlias, TypeVar
 from django.db.backends.base.base import BaseDatabaseWrapper
 from django.db.models import Q, fields
 from django.db.models.fields import Field
+from django.db.models.fields.mixins import FieldCacheMixin
 from django.db.models.lookups import Lookup, Transform
 from django.db.models.query import QuerySet
 from django.db.models.sql.compiler import SQLCompiler, _AsSqlType, _ParamsT
@@ -218,11 +219,11 @@ class DatabaseDefault(Expression):
     def __init__(self, expression: Expression, output_field: Field | None = None) -> None: ...
 
 class Col(Expression):
-    target: Field
     alias: str
+    target: Field | FieldCacheMixin
     contains_column_references: Literal[True]
     possibly_multivalued: Literal[False]
-    def __init__(self, alias: str, target: Field, output_field: Field | None = None) -> None: ...
+    def __init__(self, alias: str, target: Field | FieldCacheMixin, output_field: Field | None = None) -> None: ...
 
 class Ref(Expression):
     def __init__(self, refs: str, source: Expression) -> None: ...
