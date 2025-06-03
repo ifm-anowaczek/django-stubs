@@ -52,7 +52,7 @@ class Query(BaseExpression):
     where: WhereNode
     filter_is_sticky: bool
     subquery: bool
-    group_by: None | Sequence[Combinable] | Sequence[str] | Literal[True]
+    group_by: None | Sequence[BaseExpression] | Sequence[Combinable] | Sequence[str] | Literal[True]
     order_by: Sequence[Any]
     distinct: bool
     distinct_fields: tuple[str, ...]
